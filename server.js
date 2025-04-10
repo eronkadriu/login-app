@@ -33,7 +33,8 @@ app.post("/submit", (req, res) => {
   // Check if username already exists
   const userExists = users.find(u => u.username === username);
   if (userExists) {
-    return res.status(400).send("Username already exists.");
+    //return res.status(400).send("Username already exists.");
+    return res.sendFile(path.join(__dirname, "public", "failed.html"));
   }
 
   // Add new user
