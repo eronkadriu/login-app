@@ -12,7 +12,7 @@ app.use(express.json()); // For JSON data from frontend/JavaScript
 
 // Route for home page (optional, since public/index.html will be served automatically)
 app.get("/", (req, res) => {
-  res.send("Welcome to the registration page!");
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
 // POST route to handle registration
