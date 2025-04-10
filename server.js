@@ -1,6 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-const path = require("path"); // Add this line to fix the path issue
+const path = require("path"); // To use path.join for file paths
 const app = express();
 const PORT = 3000;
 
@@ -11,9 +11,9 @@ app.use(express.static("public")); // Serves files from "public" folder
 app.use(express.urlencoded({ extended: true })); // For form data
 app.use(express.json()); // For JSON data from frontend/JavaScript
 
-// Route for home page (this should now correctly serve login.html)
+// Route for home page (login form)
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "login.html")); // Use path.join for correct path resolution
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
 // POST route to handle registration
@@ -42,8 +42,8 @@ app.post("/submit", (req, res) => {
   // Save updated user list to file
   fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
 
-  // Respond to client
-  res.send("User registered successfully!");
+  // Serve the success page
+  res.sendFile(path.join(__dirname, "public", "success.html"));
 });
 
 // Start the server
